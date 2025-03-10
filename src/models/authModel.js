@@ -9,3 +9,17 @@ export const insertUser = async (newUser) => {
 
     return user;
 }
+
+export const getUserByUsername = async (username) => {
+    const [user] = await sql`
+        SELECT id, 
+               username,
+               email, 
+               created_at, 
+               modified_at
+        FROM users 
+        WHERE username = ${username};
+    `
+
+    return user;
+}

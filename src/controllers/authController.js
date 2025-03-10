@@ -1,4 +1,4 @@
-import { insertUser } from "../models/authModel.js"
+import { insertUser, getUserByUsername } from "../models/authModel.js"
 import {hash} from "argon2"
 
 export const signup = async (req, res, next) => {
@@ -22,6 +22,14 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
+        const user = req.body;
+
+        const foundUser = await getUserByUsername(user.username);
+
+        res.status(200).json({
+            status: "success! you are logged in",
+            data: {"user" : foundUser}
+        })
     } catch (error) {
     }
 }
