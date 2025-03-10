@@ -12,14 +12,18 @@ export const insertUser = async (newUser) => {
 
 export const getUserByUsername = async (username) => {
     const [user] = await sql`
-        SELECT id, 
-               username,
-               email, 
-               created_at, 
-               modified_at
+        SELECT *
         FROM users 
         WHERE username = ${username};
     `
+    return user;
+}
 
+export const getUserByEmail = async (email) => {
+    const [user] = await sql`
+        SELECT *
+        FROM users 
+        WHERE email = ${email};
+    `
     return user;
 }

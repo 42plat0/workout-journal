@@ -10,6 +10,8 @@ export const signup = async (req, res, next) => {
 
         const newUser = await insertUser(user);
 
+        delete(newUser.password);
+
         res.status(200).json({
             status: "success",
             data: {"user" :newUser}
@@ -31,5 +33,6 @@ export const login = async (req, res, next) => {
             data: {"user" : foundUser}
         })
     } catch (error) {
+        next(error);
     }
 }
