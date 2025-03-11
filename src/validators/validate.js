@@ -7,9 +7,9 @@ export const validate = (req, res, next) => {
         
         if (!err.isEmpty()){
             const errors = err
-                            .array()
-                            .map((error) => error.msg)
-                            .join("; ");
+                           .array()
+                           .map((error) => error.msg)
+                           .join("; ");
 
             throw new AppError(errors, 400); 
         }

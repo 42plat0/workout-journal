@@ -10,7 +10,7 @@ export const insertUser = async (newUser) => {
     return user;
 }
 
-export const getUserByUsername = async (username) => {
+export const fetchUserByUsername = async (username) => {
     const [user] = await sql`
         SELECT *
         FROM users 
@@ -19,7 +19,7 @@ export const getUserByUsername = async (username) => {
     return user;
 }
 
-export const getUserByEmail = async (email) => {
+export const fetchUserByEmail = async (email) => {
     const [user] = await sql`
         SELECT *
         FROM users 
@@ -28,11 +28,22 @@ export const getUserByEmail = async (email) => {
     return user;
 }
 
-export const getUserById = async (id) => {
+export const fetchUserById = async (id) => {
     const [user] = await sql`
         SELECT *
         FROM users 
         WHERE id = ${id};
     `
     return user;
+}
+
+export const fetchUsers = async() =>{
+    return await sql`
+        SELECT id, 
+               username, 
+               email, 
+               created_at, 
+               modified_at 
+        FROM users;
+    `
 }

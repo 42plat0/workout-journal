@@ -1,7 +1,9 @@
 import express from "express";
+import cookieParser from "cookie-parser";
+
 import AppError from "./utils/appError.js";
 import { authRouter } from "./routes/authRouter.js";
-import cookieParser from "cookie-parser";
+import { userRouter } from "./routes/userRouter.js";
 
 const app = express();
 
@@ -12,7 +14,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Middleware for routes
-app.use("/api/v1", authRouter)
+app.use("/api/v1", authRouter);
+app.use("/api/v1/users", userRouter);
 
 // Middleware for not found routes
 app.use("*", (req, res, next) => {

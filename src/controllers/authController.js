@@ -1,7 +1,7 @@
 import {hash} from "argon2";
 
 import AppError from "../utils/appError.js";
-import { insertUser, getUserByUsername, getUserById } from "../models/authModel.js";
+import { insertUser, fetchUserByUsername, fetchUserById } from "../models/userModel.js";
 import { signToken, setTokenCookie, clearCookie, verifyToken } from "../utils/cookies.js";
 
 export const signup = async (req, res, next) => {
@@ -38,7 +38,7 @@ export const login = async (req, res, next) => {
     try {
         const user = req.body;
 
-        const foundUser = await getUserByUsername(user.username);
+        const foundUser = await fetchUserByUsername(user.username);
 
         delete(foundUser.password);
 
@@ -75,7 +75,7 @@ export const protect = async (req,res,next) => {
         
         // Decode token and verify that there is user of id
         const decoded = verifyToken(token);
-        const user = await getUserById(decoded.id);
+        const user = await fetchUserById(decoded.id);
 
         if (!user)
             throw new AppError("User of id not found", 400);

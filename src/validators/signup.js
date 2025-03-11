@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { getUserByUsername, getUserByEmail } from "../models/authModel.js";
+import { fetchUserByUsername, fetchUserByEmail } from "../models/userModel.js";
 import AppError from "../utils/appError.js";
 
 export default [
@@ -9,7 +9,7 @@ export default [
         .isLength({min: 3, max: 80})
             .withMessage("Username field must be of length 3-80")
         .custom(async (username) => {
-            const user = await getUserByUsername(username);
+            const user = await fetchUserByUsername(username);
             if (user)
                 throw new AppError("Username or email is not available", 400);
 
@@ -30,7 +30,7 @@ export default [
         .isEmail()
             .withMessage("Enter valid email address")
         .custom(async (email) => {
-            const user = await getUserByEmail(email);
+            const user = await fetchUserByEmail(email);
             if (user)
                 throw new AppError("Username or email is not available", 400);
 
