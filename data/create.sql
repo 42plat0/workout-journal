@@ -18,10 +18,10 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS workouts(
     id       SERIAL PRIMARY KEY,
     name     VARCHAR(100) NOT NULL,
+    created_at  TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp,
     user_id  INT NOT NULL,
-    user_username VARCHAR(80) NOT NULL,
-    FOREIGN KEY (user_id, user_username) REFERENCES users (id, username)
-) 
+    FOREIGN KEY (user_id) REFERENCES users (id)
+)
 
 CREATE TABLE IF NOT EXISTS exercises(
     id SERIAL PRIMARY KEY,
