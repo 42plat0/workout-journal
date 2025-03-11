@@ -13,7 +13,7 @@ export const signup = async (req, res, next) => {
 
         const newUser = await insertUser(user);
 
-        delete(newUser.password);
+        newUser.password = undefined;
         
         // Update cookies by clearing
         if (req.cookies.jwt)
@@ -40,7 +40,7 @@ export const login = async (req, res, next) => {
 
         const foundUser = await fetchUserByUsername(user.username);
 
-        delete(foundUser.password);
+        foundUser.password = undefined;
 
         // Update cookies by clearing
         if (req.cookies.jwt)
@@ -80,6 +80,7 @@ export const protect = async (req,res,next) => {
         if (!user)
             throw new AppError("User of id not found", 400);
 
+        user.password = undefined;
         // Attach user to request
         req.user = user;
 

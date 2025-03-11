@@ -1,4 +1,6 @@
 import { fetchUsers, fetchUserByUsername, fetchUserById } from "../models/userModel.js";
+import { verifyToken } from "../utils/cookies.js";
+
 import AppError from "../utils/appError.js";
 
 export const getUsers = async (req, res, next) => {
@@ -34,5 +36,19 @@ export const getUserByIdentifier = async (req, res, next) =>{
     } catch (error) {
         next(error);
     } 
+}
+
+export const getLoggedInUser = async (req, res, next) => {
+    try {
+        // Check if logged in
+        const user = req.user;
+
+        res.status(200).json({
+            status: "success",
+            user: user
+        })
+
+    } catch (error) {
+    }
 }
 

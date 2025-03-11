@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 // Sign token
 export const signToken = (id) => {
@@ -29,4 +29,4 @@ export const clearCookie = (tokenName, res) =>
     res.clearCookie(tokenName)
 
 // Verify token
-export const verifyToken = (token) => jwt.verify(token, JWT_SECRET_KEY);
+export const verifyToken = (token) => jwt.verify(token, process.env.JWT_SECRET_KEY);
