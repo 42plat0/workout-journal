@@ -1,6 +1,7 @@
 import express from "express";
 import AppError from "./utils/appError.js";
 import { authRouter } from "./routes/authRouter.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -8,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 // Parse cookies
+app.use(cookieParser());
 
 // Middleware for routes
 app.use("/api/v1", authRouter)
@@ -15,7 +17,7 @@ app.use("/api/v1", authRouter)
 // Middleware for not found routes
 app.use("*", (req, res, next) => {
     const err = new AppError(`Endpoint ${req.originalUrl} is not found`, 404);
-    next(error);
+    next(err);
 })
 
 // Middleware for centralized error handling
@@ -30,6 +32,5 @@ app.use((error, req, res, next) => {
         stack: error.stack
     })
 })
-
 
 export {app};
