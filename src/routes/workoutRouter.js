@@ -1,11 +1,18 @@
-import express from "express";
+import { Router } from "express";
 
 import {validate} from "../validators/validate.js";
-import { getWorkouts } from "../controllers/workoutController.js";
+import gettingWorkout from "../validators/workout.js";
 
-export const workoutRouter = express.Router();
+import { getWorkout, getWorkouts } from "../controllers/workoutController.js";
+
+export const workoutRouter = Router();
 
 // Get all workouts
 workoutRouter.route("/")
     .get(getWorkouts)
+;
 
+// Get workout by id
+workoutRouter.route("/:id")
+    .get(gettingWorkout, validate, getWorkout)
+;

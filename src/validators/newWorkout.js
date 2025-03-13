@@ -5,7 +5,6 @@ import { fetchUserById } from "../models/userModel.js";
 export default [
     param("uId")
         .custom(async(id) => {
-            // Check if :id was given or username
             const user = await fetchUserById(+id);
 
             if (!user) 

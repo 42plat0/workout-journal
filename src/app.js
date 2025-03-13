@@ -5,6 +5,7 @@ import AppError from "./utils/appError.js";
 import { authRouter } from "./routes/authRouter.js";
 import { userRouter } from "./routes/userRouter.js";
 import { workoutRouter } from "./routes/workoutRouter.js";
+import { exerciseRouter } from "./routes/exerciseRouter.js";
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(cookieParser());
 // Middleware for routes
 app.use("/api/v1", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/workouts", workoutRouter);
+app.use("/api/v1/workouts", workoutRouter, exerciseRouter);
 
 // Middleware for not found routes
 app.use("*", (req, res, next) => {

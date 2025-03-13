@@ -28,5 +28,7 @@ CREATE TABLE IF NOT EXISTS exercises(
     name VARCHAR(100) NOT NULL,
     region VARCHAR(80) NOT NULL,
     sets INT NOT NULL,
-    reps INT NOT NULL
+    reps INT NOT NULL,
+    workout_id INT NOT NULL,
+    FOREIGN KEY (workout_id) REFERENCES workouts (id)
 )
