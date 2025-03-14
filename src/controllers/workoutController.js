@@ -1,5 +1,5 @@
 import { fetchUserById } from "../models/userModel.js";
-import { fetchWorkout, fetchWorkouts, insertWorkout, } from "../models/workoutModel.js";
+import { fetchUserWorkouts, fetchWorkout, fetchWorkouts, insertWorkout, } from "../models/workoutModel.js";
 
 export const getWorkouts = async (req, res, next) => {
     try {
@@ -16,7 +16,16 @@ export const getWorkouts = async (req, res, next) => {
 
 export const getUserWorkouts = async (req, res, next) => {
     try {
+        const {uId} = req.params;
+
+        const workouts = await fetchUserWorkouts(uId); 
+        
+        res.status(200).json({
+            status: "success",
+            workouts: workouts
+        })
     } catch (error) {
+        next(error);
     }
 }
 

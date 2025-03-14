@@ -30,3 +30,20 @@ export const fetchWorkout = async (id) => {
 
     return workout;
 }
+
+export const fetchUserWorkouts = async (uId) => {
+    const workouts = await sql`
+        SELECT w.id AS workout_id,
+               w.name AS workout_name,
+               w.user_id,
+               (SELECT username FROM users WHERE id = ${uId}),
+               JSON_AGG(e.*) AS exercises
+        FROM workouts w
+        LEFT JOIN exercises e
+               ON w.id = e.workout_id
+        WHERE user_id = ${uId}
+        GROUP BY w.id;
+    `
+
+    return workouts;
+}
