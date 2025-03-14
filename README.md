@@ -36,8 +36,6 @@ Built with Node.js and Express.js.
 ### Exercises 
 
 - `POST /api/v1/workouts/:id/exercises` - Add exercise to a workout
-- `PUT /api/v1/workouts/:workout_id/exercises/:id` - Edit a workout's exercise (TODO)
-- `DELETE /api/v1/workouts/exercises/:id` - Delete a workout's exercise (TODO)
 
 ## Getting Started
 
@@ -77,6 +75,14 @@ JWT_COOKIE_EXPIRES=7
 ## Scripts
 
 - `npm start` - Start the development server with nodemon
+
+## To do 
+- `PUT /api/v1/workouts/:workout_id/exercises/:id` - Edit a workout's exercise (TODO)
+- `DELETE /api/v1/workouts/exercises/:id` - Delete a workout's exercise (TODO)
+- Validators for ep's that are missing them
+- GUI
+- Tracking workout functionality (Each workout update exercise rep, set, weight values for workout)
+- Progress visualization
 
 ## License
 
