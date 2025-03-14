@@ -20,7 +20,9 @@ CREATE TABLE IF NOT EXISTS workouts(
     name     VARCHAR(100) NOT NULL,
     created_at  TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp,
     user_id  INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id) 
+                          ON DELETE CASCADE, 
+                          ON UPDATE CASCADE
 )
 
 CREATE TABLE IF NOT EXISTS exercises(
@@ -31,4 +33,6 @@ CREATE TABLE IF NOT EXISTS exercises(
     reps INT NOT NULL,
     workout_id INT NOT NULL,
     FOREIGN KEY (workout_id) REFERENCES workouts (id)
+                             ON DELETE CASCADE, 
+                             ON UPDATE CASCADE
 )

@@ -1,5 +1,5 @@
 import { fetchUserById } from "../models/userModel.js";
-import { fetchUserWorkouts, fetchWorkout, fetchWorkouts, insertWorkout, updWorkoutDb, } from "../models/workoutModel.js";
+import { delWorkoutDb, fetchUserWorkouts, fetchWorkout, fetchWorkouts, insertWorkout, updWorkoutDb, } from "../models/workoutModel.js";
 import AppError from "../utils/appError.js";
 
 export const getWorkouts = async (req, res, next) => {
@@ -83,6 +83,25 @@ export const updateWorkout = async (req, res, next) => {
         res.status(200).json({
             updated_count: updatedWorkout.length
         })
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const deleteWorkout = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        
+        const deletedWorkout = await delWorkoutDb(id);
+
+        if (!deletedWorkout)
+            throw new AppError("COuldn't delete workout", 500);
+
+        res.status(200).json({
+            message: "Selected workout was removed"
+        })
+
 
     } catch (error) {
         next(error);

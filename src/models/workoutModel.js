@@ -54,8 +54,17 @@ export const updWorkoutDb = async (wId, workout) => {
         UPDATE workouts
         SET ${sql(workout, 'name')}
         WHERE id = ${wId}
-        RETURNING *
+        RETURNING id;
     `
 
     return workouts;
+}
+
+export const delWorkoutDb = async (wId) => {
+    const [workout] = await sql`
+        DELETE FROM workouts 
+        WHERE id = ${wId}
+        RETURNING *;
+    `
+    return workout;
 }
