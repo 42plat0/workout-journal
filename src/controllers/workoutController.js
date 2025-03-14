@@ -1,5 +1,6 @@
 import { fetchUserById } from "../models/userModel.js";
-import { fetchUserWorkouts, fetchWorkout, fetchWorkouts, insertWorkout, } from "../models/workoutModel.js";
+import { fetchUserWorkouts, fetchWorkout, fetchWorkouts, insertWorkout, updWorkoutDb, } from "../models/workoutModel.js";
+import AppError from "../utils/appError.js";
 
 export const getWorkouts = async (req, res, next) => {
     try {
@@ -58,6 +59,29 @@ export const createWorkout = async (req, res, next) => {
         res.status(200).json({
             status: "success",
             workout: newWorkout
+        })
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const updateWorkout = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Only name as such:
+        // {"name" : "updated workout"}
+        const workout = req.body;
+
+        const updatedWorkout = await updWorkoutDb(id, workout);
+
+        if (!updatedWorkout.length)
+            throw new AppError("Workout was not updated", 500);
+        // Return how many records were changed
+        
+        res.status(200).json({
+            updated_count: updatedWorkout.length
         })
 
     } catch (error) {

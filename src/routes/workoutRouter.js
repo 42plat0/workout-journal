@@ -3,7 +3,7 @@ import { Router } from "express";
 import {validate} from "../validators/validate.js";
 import gettingWorkout from "../validators/workout.js";
 
-import { getWorkout, getWorkouts } from "../controllers/workoutController.js";
+import { getWorkout, getWorkouts, updateWorkout } from "../controllers/workoutController.js";
 
 export const workoutRouter = Router();
 
@@ -15,4 +15,5 @@ workoutRouter.route("/")
 // Get workout by id
 workoutRouter.route("/:id")
     .get(gettingWorkout, validate, getWorkout)
+    .put(gettingWorkout, validate, updateWorkout)
 ;

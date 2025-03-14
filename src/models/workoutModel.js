@@ -47,3 +47,15 @@ export const fetchUserWorkouts = async (uId) => {
 
     return workouts;
 }
+
+export const updWorkoutDb = async (wId, workout) => {
+    // Return list
+    const workouts = await sql`
+        UPDATE workouts
+        SET ${sql(workout, 'name')}
+        WHERE id = ${wId}
+        RETURNING *
+    `
+
+    return workouts;
+}
