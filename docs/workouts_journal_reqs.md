@@ -29,13 +29,13 @@ Allow users add, delete exercises for each workout.
 | <a style="color:green" href="#userID">GET User By ID</a>                                            | /api/v1/users/:id                          |
 | <a style="color:green" href="#username">GET User By Username</a>                                    | /api/v1/users/:username              |
 | <a style="color:green" href="#userWithJWT">GET User Profile With JWT</a>                            | /api/v1/users/profile                      |
-| <a  href="#userWorkouts">GET User's workouts</a>                                 | /api/v1/users/:id/workouts                 |
+| <a style="color:green" href="#userWorkouts">GET User's workouts</a>                                 | /api/v1/users/:id/workouts                 |
 | <a style="color:green" href="#addWorkoutToUser">POST Add a workout to a user</a>                    | /api/v1/users/:id/workouts                 |
 | <a style="color:green" href="#allWorkouts">GET All workouts</a>                                     | /api/v1/workouts                           |
-| <a  href="#workoutID">GET Workout by ID</a>                                      | /api/v1/workouts/:id                       |
-| <a  href="#editWorkout">PUT Edit a workout</a>                                   | /api/v1/workouts/:id                       |
+| <a  style="color:green" href="#workoutID">GET Workout by ID</a>                                      | /api/v1/workouts/:id                       |
+| <a  style="color:green" href="#editWorkout">PUT Edit a workout</a>                                   | /api/v1/workouts/:id                       |
 | <a style="color:green" href="#deleteWorkout">DELETE Delete a workout</a>                            | /api/v1/workouts/:id                       |
-| <a  href="#addExercise">POST Add exercise to a workout</a> **(Optional)**        | /api/v1/workouts/:id/exercises             |
+| <a  style="color:green" href="#addExercise">POST Add exercise to a workout</a> **(Optional)**        | /api/v1/workouts/:id/exercises             |
 | <a  href="#editExercise">PUT Edit a workout's exercise</a> **(Optional)**        | /api/v1/workouts/:workout_id/exercises/:id |
 | <a  href="#deleteExercise">DELETE Delete a workout's exercise</a> **(Optional)** | /api/v1/workouts/exercises/:id             |
 

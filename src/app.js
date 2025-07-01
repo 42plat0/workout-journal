@@ -6,6 +6,7 @@ import { authRouter } from "./routes/authRouter.js";
 import { userRouter } from "./routes/userRouter.js";
 import { workoutRouter } from "./routes/workoutRouter.js";
 import { exerciseRouter } from "./routes/exerciseRouter.js";
+import cors from "cors";
 
 const app = express();
 
@@ -14,6 +15,12 @@ app.use(express.json());
 
 // Parse cookies
 app.use(cookieParser());
+
+// cors
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173' // TODO change
+}))
 
 // Middleware for routes
 app.use("/api/v1", authRouter);
