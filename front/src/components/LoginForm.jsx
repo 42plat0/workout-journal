@@ -1,17 +1,15 @@
 import { MyForm } from "./MyForm";
 
-import { useForm } from "react-hook-form";
-
-import { Input, Label, Button } from "./MyFormComponents.jsx";
-
-
 export function LoginForm(){
-    const onSubmit = (data) => console.log(data);
-
-    const username = ['username', 'Prisijungimo vardas', {required: true}];
-    const password = ['password', 'Slaptažodis', {required: true}];
+    const username = ['username', 'Prisijungimo vardas', {required: 'Prisijungimo vardas yra privalomas'}];
+    const password = ['password', 'Slaptažodis', {required: 'Slaptažodis yra privalomas'}];
 
     const login = [username, password];
 
-    return <MyForm {...login}/>
+    const formData = {
+        fields: login,
+        endpoint: 'login'
+    };
+
+    return <MyForm {...formData}/>
 }

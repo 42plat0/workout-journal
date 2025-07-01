@@ -1,17 +1,16 @@
 import { MyForm } from "./MyForm";
-import { Input, Label, Button } from "./MyFormComponents.jsx";
 
+export function RegisterForm(){
+    const username = ['username', 'Prisijungimo vardas', {required: 'Prisijungimo vardas yra privalomas'}];
+    const password = ['password', 'Slaptažodis', {required: 'Slaptažodis yra privalomas'}];
+    const repassword = ['repassword', 'Pakartokite Slaptažodį', {required: 'Slaptažodis yra privalomas'}];
 
-export function LoginForm(){
-    const onSubmit = (data) => console.log(data);
+    const register = [username, password, repassword];
 
-    const validationOpts = {required: true};
+    const formData = {
+        fields: register,
+        endpoint: 'register'
+    };
 
-    const username = ['username', 'Prisijungimo vardas', validationOpts];
-    const email = ['email', 'Elektroninis paštas', validationOpts];
-    const password = ['password', 'Slaptažodis', validationOpts];
-
-    const register = [username, email, password];
-
-    return <MyForm {...register}/>
+    return <MyForm {...formData}/>
 }

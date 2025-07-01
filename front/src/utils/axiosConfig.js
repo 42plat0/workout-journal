@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { url } from "./constants";
+import { url } from "./constants.js";
 
 export const myAxios = axios.create({
-    baseURL: url,
+    baseURL: url + '/',
     withCredentials: true
 })
 
@@ -20,7 +20,6 @@ myAxios.interceptors.response.use((config) => {
 }, (err) => {
     if (err.response){
         const data = err.response.data;
-        Promise.reject(data.message);
         return {error: data.message};
     }
     return Promise.reject(err);

@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-import './App.css'
 import { readWorkouts } from './services/workoutService.js'
 import { readUsers } from './services/userService.js'
-import { MyForm } from './components/MyForm.jsx'
 import { LoginForm } from './components/LoginForm.jsx'
-
+import { RegisterForm } from './components/RegisterForm.jsx'
 
 function App() {
     const [workouts, setWorkouts] = useState(null);
@@ -24,7 +22,8 @@ function App() {
 
     return (
         <>
-            <MyForm/>
+            <LoginForm/>
+            <RegisterForm/>
             <div className="card">
                 {users &&
                     users.map((users, idx) => {
