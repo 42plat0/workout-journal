@@ -1,10 +1,12 @@
-import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useLocation } from "react-router";
 
 import { Input, Label, Button, Para } from "./MyFormComponents.jsx";
 
 import { getInputParams } from "../utils/form.js";
 import { myAxios } from "../utils/axiosConfig.js";
+import { getUrlParts } from "../utils/utils.js";
 
 export function MyForm(props) {
     const [error, setError] = useState(null);
@@ -16,6 +18,8 @@ export function MyForm(props) {
         clearErrors,
         reset
     } = useForm();
+
+    const nav = useNavigate(), loc = useLocation();
 
     const buttonContent = props?.btnCont ? props?.btnCont : "Siusti";
     const onSubmit = (data) => sendForm(data);
@@ -39,6 +43,12 @@ export function MyForm(props) {
         setError(null);
         setMsg(null);
     };
+
+    const onOtherAction = () => {
+        const baseEP = getUrlParts(loc.pathname)[0];
+        const fullUrlToOtherAction = `${baseEP}/${props.otherAction.nav}`;
+        nav(fullUrlToOtherAction);
+    }
 
     let formData = null;
     if (Object.keys(props).length){
@@ -69,7 +79,7 @@ export function MyForm(props) {
                 </Para>
             }
             
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} >
                 {formData &&
                     formData.map((item, idx) =>
                         <div key={idx}>
@@ -79,7 +89,12 @@ export function MyForm(props) {
                     )
                 }
 
-                <Button>{buttonContent}</Button>
+                <div className="flex justify-center gap-5">
+                    <Button>{buttonContent}</Button>
+                    {props.otherAction && 
+                        <Button onClick={onOtherAction}>{props.otherAction.label}</Button>
+                    }
+                </div>
             </form>
         </>
     )

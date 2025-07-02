@@ -11,6 +11,7 @@ export function RegisterForm(){
         fields: [username, email, password, repassword],
         endpoint: 'register',
         btnCont : 'Registruotis',
+        otherAction: {nav: 'login', label: 'Prisijungti'}
     };
 
     return <MyForm {...formData}/>

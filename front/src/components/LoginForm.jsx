@@ -8,7 +8,7 @@ export function LoginForm(){
         fields: [username, password],
         endpoint: 'login',
         btnCont : 'Prisijungti',
-        successMsg : 'Sėkmingai prisijungėte'
+        otherAction: {nav: 'register', label: 'Registruotis'}
     };
 
     return <MyForm {...formData}/>

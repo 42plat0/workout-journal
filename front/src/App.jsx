@@ -9,18 +9,17 @@ import { RegisterForm } from './components/RegisterForm.jsx'
 import { Login } from './pages/LoginPage.jsx'
 import { Register } from './pages/RegisterPage.jsx'
 import { NotFound } from './pages/NotFoundPage.jsx'
+import { Workouts } from './pages/Workouts.jsx'
+import { AuthLayout } from './pages/AuthLayout.jsx'
+import { Layout } from './pages/Layout.jsx'
 
 function App() {
     const [workouts, setWorkouts] = useState(null);
     const [users, setUsers] = useState(null);
 
-    const getWorkouts = async () => await readWorkouts().then((data) => setWorkouts(data));
-
     const getUsers = async() => await readUsers().then((data) => setUsers(data));
 
     useEffect(() => {
-        getWorkouts();
-        getUsers();
     }, [])
 
 
@@ -28,33 +27,15 @@ function App() {
         <>
             <Routes>
                 <Route index element={<NotFound />} />
-                <Route path="somepath" element={<Somelement/>} />
 
-                <Route path="/auth">
+                <Route path="/auth" element={<AuthLayout />}>
                     <Route path="login" element={<Login/>} />
                     <Route path="register" element={<Register/>} />
                 </Route>
 
+                <Route path="somepath" element={<Workouts/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-            /*
-            <LoginForm/>
-            <RegisterForm/>
-            <div className="card">
-                {users &&
-                    users.map((users, idx) => {
-                        return <p key={users.id}>{users.username}</p>
-                    })
-                }
-            </div>
-            <div className="card">
-                {workouts &&
-                    workouts.map((workout, idx) => {
-                        return <p key={workout.id}>{workout.name}</p>
-                    })
-                }
-            </div>
-            */
         </>
     )
 }
