@@ -7,6 +7,7 @@ import { signToken, setTokenCookie, clearCookie, verifyToken } from "../utils/co
 export const signup = async (req, res, next) => {
     try {
         const user = req.body;
+        delete(user.repassword);
         
         // Hash password
         user.password = await hash(user.password);
@@ -26,7 +27,8 @@ export const signup = async (req, res, next) => {
 
         res.status(200).json({
             status: "success",
-            data: {"user" :newUser}
+            data: {"user" :newUser},
+            message: "Vartotojas sėkmingai sukurtas!"
         })
 
     } catch (error) {
@@ -52,8 +54,9 @@ export const login = async (req, res, next) => {
         setTokenCookie(token, res);
 
         res.status(200).json({
-            status: "Success! You logged in",
-            data: {"user" : foundUser}
+            status: "success",
+            data: {"user" : foundUser},
+            message: 'Sėkmingai prisijungėte'
         })
     } catch (error) {
         next(error);

@@ -7,29 +7,38 @@ import { getInputParams } from "../utils/form.js";
 import { myAxios } from "../utils/axiosConfig.js";
 
 export function MyForm(props) {
+    const [error, setError] = useState(null);
+    const [msg, setMsg]     = useState(null);
     const {
         register,
         handleSubmit,
         formState: {errors},
-        clearErrors
+        clearErrors,
+        reset
     } = useForm();
 
-    const [error, setError] = useState(null);
+    const buttonContent = props?.btnCont ? props?.btnCont : "Siusti";
+    const onSubmit = (data) => sendForm(data);
 
     const sendForm = async (data) => {
-        let res = await myAxios.post('login', { ...data });
+        let res = await myAxios.post(props.endpoint, { ...data });
 
-        if (res)
-            setError(res.error);
+        if (res){
+            if (res.error)
+                setError(res.error);
+            else if (res.status === 'success'){
+                setMsg(res.message);
+                reset();
+            }
+        }
     }  
 
     // Clears all errors whenever any input changes
     const handleAnyChange = () => {
         clearErrors();
         setError(null);
+        setMsg(null);
     };
-
-    const onSubmit = (data) => sendForm(data);
 
     let formData = null;
     if (Object.keys(props).length){
@@ -47,11 +56,17 @@ export function MyForm(props) {
                 <Para className="error" style={{color: "red"}}>
                     {error}
                 </Para>
+                ||
+             msg && // Shows success msg
+                <Para className="success" style={{color: "green"}}>
+                    {msg}
+                </Para>
             }
+
             {Object.keys(errors).length > 0 &&  // Show first error message
-                    <Para className="error" style={{color: "red"}}>
-                        {Object.values(errors)[0].message}
-                    </Para>
+                <Para className="error" style={{color: "red"}}>
+                    {Object.values(errors)[0].message}
+                </Para>
             }
             
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +79,7 @@ export function MyForm(props) {
                     )
                 }
 
-                <Button> "Siusti" </Button>
+                <Button>{buttonContent}</Button>
             </form>
         </>
     )

@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router'
 
 import { readWorkouts } from './services/workoutService.js'
 import { readUsers } from './services/userService.js'
 import { LoginForm } from './components/LoginForm.jsx'
 import { RegisterForm } from './components/RegisterForm.jsx'
+
+import { Login } from './pages/LoginPage.jsx'
+import { Register } from './pages/RegisterPage.jsx'
+import { NotFound } from './pages/NotFoundPage.jsx'
 
 function App() {
     const [workouts, setWorkouts] = useState(null);
@@ -22,6 +26,18 @@ function App() {
 
     return (
         <>
+            <Routes>
+                <Route index element={<NotFound />} />
+                <Route path="somepath" element={<Somelement/>} />
+
+                <Route path="/auth">
+                    <Route path="login" element={<Login/>} />
+                    <Route path="register" element={<Register/>} />
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            /*
             <LoginForm/>
             <RegisterForm/>
             <div className="card">
@@ -38,6 +54,7 @@ function App() {
                     })
                 }
             </div>
+            */
         </>
     )
 }

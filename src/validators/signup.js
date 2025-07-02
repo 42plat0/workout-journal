@@ -22,6 +22,16 @@ export default [
         .isLength({min: 3, max: 255})
             .withMessage("Password field must be of length 3-255")
     ,
+    body("repassword")
+        .notEmpty()
+            .withMessage("Confirm password cannot be empty")
+        .custom((repass, {req}) => {
+            if (repass !== req.body.password)
+                throw new AppError('Slaptažodžiai privalo sutapti');
+            return true;
+        })
+        
+    ,
     body("email")
         .notEmpty()
             .withMessage("Username field cannot be empty")
