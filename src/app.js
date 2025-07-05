@@ -24,7 +24,7 @@ app.use(cors({
 
 // Middleware for routes
 app.use("/api/v1", authRouter);
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/user", userRouter);
 app.use("/api/v1/workouts", workoutRouter, exerciseRouter);
 
 // Middleware for not found routes

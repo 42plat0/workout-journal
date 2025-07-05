@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router";
 
-import { Input, Label, Button, Para } from "./MyFormComponents.jsx";
+import { Input, Label, Button, Para } from "./BaseComponents.jsx";
 
 import { getInputParams } from "../utils/form.js";
 import { myAxios } from "../utils/axiosConfig.js";
@@ -22,6 +22,7 @@ export function MyForm(props) {
     const nav = useNavigate(), loc = useLocation();
 
     const buttonContent = props?.btnCont ? props?.btnCont : "Siusti";
+
     const onSubmit = (data) => sendForm(data);
 
     const sendForm = async (data) => {
@@ -32,9 +33,11 @@ export function MyForm(props) {
                 setError(res.error);
             else if (res.status === 'success'){
                 setMsg(res.message);
+                nav("/", { replace: true })
                 reset();
             }
         }
+
     }  
 
     // Clears all errors whenever any input changes

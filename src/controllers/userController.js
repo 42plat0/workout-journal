@@ -43,12 +43,15 @@ export const getLoggedInUser = async (req, res, next) => {
         // Check if logged in
         const user = req.user;
 
+        delete(user.modified_at);
+        delete(user.created_at);
         res.status(200).json({
             status: "success",
-            user: user
+            data: user
         })
 
     } catch (error) {
+        next(error);
     }
 }
 

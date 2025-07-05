@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
+import { Workout } from "../components/Workout";
 import { readWorkouts } from "../services/workoutService";
+import { Heading3 } from "../components/BaseComponents";
 
 export function Workouts(){
     const [workouts, setWorkouts] = useState(null);
@@ -11,11 +13,21 @@ export function Workouts(){
         getWorkouts();
     }, [])
 
-    {workouts &&
-        workouts.map((workout, idx) => {
-            return <p key={workout.id}>{workout.name}</p>
-        })
-    }
+    return(
+        <>
+        <Heading3>My workouts</Heading3>
+        
+        <div className="flex flex-wrap gap-3">
+            {workouts &&
+                workouts.map((workout, idx) => {
+                    return( 
+                        <Workout key={idx}>{workout}</Workout>
+                    )
+                })
+            } 
+        </div>
+        </>
+    );
 
 }
 

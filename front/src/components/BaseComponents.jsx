@@ -13,3 +13,15 @@ export function Button({children, ...attributes}){
 export function Para({children, ...attributes}){
     return <p {...attributes}>{children}</p>;
 }
+
+export function Card({ children, ...attributes }){
+    return <div {...attributes}>{children}</div>;
+}
+
+export function Heading3({ children, ...attributes }){
+    return <h3 className="heading3"{...attributes}>{children}</h3>;
+}
+
+export function TextContent({ children, ...attributes }){
+    return <p {...attributes}>{children}</p>;
+}

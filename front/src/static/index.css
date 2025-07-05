@@ -1,0 +1,31 @@
+.card{
+    @apply flex flex-col justify-between block max-w-sm h-48 px-6 pt-4 pb-2 bg-sky-500/50 border border-gray-200 rounded-lg shadow-sm hover:bg-sky-200 bg-gray-800 border-gray-700 bg-gray-700;
+}
+
+.card-heading{
+    @apply mb-2 text-2xl font-bold tracking-tight text-gray-900 text-black;
+}
+
+.card-content{
+    @apply font-normal text-black;
+}
+
+.heading3{
+    @apply text-3xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight
+}
+
+.nav-links{
+    @apply font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0;
+}
+
+.nav-link_wrapper{
+    @apply flex items-center;
+}
+
+.nav-link{
+    @apply block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-sky-300 md:p-0 dark:text-white hover:text-white md:hover:bg-transparent  hover:border-b-2 hover:border-solid;
+}
+
+.nav-link-main__text{
+    @apply self-center text-2xl font-semibold whitespace-nowrap text-white;
+}
