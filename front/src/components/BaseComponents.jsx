@@ -22,6 +22,10 @@ export function Heading3({ children, ...attributes }){
     return <h3 className="heading3"{...attributes}>{children}</h3>;
 }
 
-export function TextContent({ children, ...attributes }){
-    return <p {...attributes}>{children}</p>;
+export function Select({ children, ...attributes }){
+    return <select {...attributes}>{children}</select>;
+}
+
+export function Option({ children, ...attributes }){
+    return <option {...attributes}>{children}</option>;
 }

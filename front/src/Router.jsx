@@ -9,6 +9,8 @@ import { AuthLayout } from './pages/AuthLayout.jsx'
 import { Layout } from './pages/Layout.jsx'
 import { ProtectedRoute } from './pages/ProtectedPage.jsx'
 import { WorkoutForm } from './components/WorkoutForm.jsx'
+import { Users } from './pages/Users.jsx'
+import { UserForm } from './components/UserForm.jsx'
 
 export const Router = () => {
     return(
@@ -19,18 +21,40 @@ export const Router = () => {
                 <Route path="register" element={<Register />} />
                 <Route path="logout" element={<Logout />} />
             </Route>
+            
+            // Admin
+            <Route path="users"element={<Layout />}>
+                <Route index element={
+                    <ProtectedRoute allowedTo={'admin'}>
+                        <Users/>
+                    </ProtectedRoute>
+                }/>
+            
+                <Route path="create" element={
+                    <ProtectedRoute allowedTo={'admin'}>
+                        <UserForm/>
+                    </ProtectedRoute>
+                }/>
+                
+                <Route path="edit/:id" element={
+                    <ProtectedRoute allowedTo={'admin'}>
+                        <UserForm/>
+                    </ProtectedRoute>
+                }/>
+            </Route>
 
             // Content page
             <Route path="/" element={<Layout />}>
                 // Home
                 <Route index element={
-                    <ProtectedRoute>
+                    <ProtectedRoute allowedTo={'user'}>
                         <Workouts />
                     </ProtectedRoute>
                 }/>
+
                 <Route path="workout">
                     <Route path="create" element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedTo={'user'}>
                             <WorkoutForm/>
                         </ProtectedRoute>
                     }/>

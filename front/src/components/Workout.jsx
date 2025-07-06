@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { deleteWorkout } from "../services/workoutService";
-import { Card, Heading3, TextContent, Button } from "./BaseComponents";
+import { Card, Heading3, Para, Button } from "./BaseComponents";
 
 const deleteWorkoutHandler = (id) => {
     deleteWorkout(id);
@@ -19,7 +19,7 @@ export function Workout({ children }) {
         <Card className="card">
             <div>
                 <Heading3 className="card-heading">{name}</Heading3>
-                <TextContent className="card-content"> some text is here</TextContent>
+                <Para className="card-content"> some text is here</Para>
             </div>
             <div className="flex gap-3">
                 <Button>Edit</Button>

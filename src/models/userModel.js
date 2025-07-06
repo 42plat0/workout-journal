@@ -42,8 +42,7 @@ export const fetchUsers = async() =>{
         SELECT id, 
                username, 
                email, 
-               created_at, 
-               modified_at 
+               role
         FROM users;
     `
 }
